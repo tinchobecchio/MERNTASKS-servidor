@@ -17,8 +17,6 @@ export const crearUsuario = async (req,res) => {
 
     try {
         // Revisar que el usuario registrado sea unico
-
-
         let usuario = await Usuario.findOne({email})
 
         if(usuario) {
