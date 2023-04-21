@@ -1,8 +1,17 @@
 import Usuario from '../models/Usuario.js'
 import bcryptjs from 'bcryptjs'
+import { validationResult } from 'express-validator'
+import jwt  from 'jsonwebtoken'
 
 export const crearUsuario = async (req,res) => {
     
+    // Revisar si hay errores
+    const errores = validationResult(req)
+    if(!errores.isEmpty()) {
+        return res.status(400).json({errores: errores.array()})
+    }
+
+
     // extraer email y password
     const { email, password } = req.body
 
@@ -26,9 +35,24 @@ export const crearUsuario = async (req,res) => {
         // guardar el usuario
         await usuario.save()
 
-        // Mensaje de confirmacion
-        res.json({msg: 'Usuario creado correctamente'})
-        // guardar el nuevo usuario
+        // Crear y firmar el JWT
+        const payload = {
+            usuario: {
+                id: usuario.id
+            }
+        }
+
+        // Firmar el JWT
+        jwt.sign(payload, process.env.SECRETA, {
+            expiresIn: 3600 // 1 hora
+        }, (error, token) => {
+            if(error) throw error
+            
+            // Mensaje de confirmacion
+            res.json({ token })
+        })
+
+
     } catch (error) {
         console.log(error);
         res.status(400).send('Hubo un error')

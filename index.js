@@ -1,6 +1,6 @@
 import express from "express";
 import conectarDB from "./config/db.js";
-import router from './routes/usuarios.js'
+import usersRouter from './routes/usuarios.js'
 
 // Crear el servidor
 const app = express()
@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 4000
 
 
 // Importar rutas
-app.use('/api/usuarios', router)
+app.use('/api/usuarios', usersRouter)
 
 
 app.listen(PORT, () => {
