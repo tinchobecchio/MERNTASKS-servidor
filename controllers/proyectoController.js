@@ -5,6 +5,11 @@ export const crearProyecto = (req,res) => {
     try {
         //Crear un nuevo Proyecto
         const proyecto = new Proyecto(req.body)
+
+        // Guardar el creador via JWT
+        proyecto.creador = req.usuario.id
+
+        // Guardar proyecto
         proyecto.save()
         res.json(proyecto)
     } catch (error) {
@@ -12,5 +17,5 @@ export const crearProyecto = (req,res) => {
         res.status(500).send('Hubo un error')
     }
 }
- 
+
 export default crearProyecto;
