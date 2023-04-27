@@ -1,5 +1,5 @@
 import express from 'express';
-import { crearProyecto, obtenerProyectos, actualizarProyecto } from '../controllers/proyectoController.js'
+import { crearProyecto, obtenerProyectos, actualizarProyecto, eliminarProyecto } from '../controllers/proyectoController.js'
 import auth from '../middleware/auth.js';
 import { check } from 'express-validator';
 
@@ -30,5 +30,10 @@ proyectosRouter.put('/:id',
     actualizarProyecto
 )
 
+// Eliminar un proyecto
+proyectosRouter.delete('/:id',
+    auth,
+    eliminarProyecto
+)
 
 export default proyectosRouter
