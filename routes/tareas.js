@@ -1,5 +1,5 @@
 import express from 'express';
-import { crearTarea, obtenerTareas } from '../controllers/tareasController.js'
+import { crearTarea, obtenerTareas, actualizarTarea, eliminarTarea } from '../controllers/tareasController.js'
 import auth from '../middleware/auth.js';
 import { check } from 'express-validator';
 
@@ -23,5 +23,16 @@ tareasRouter.get('/',
     obtenerTareas
 )
 
+// Actualizar tarea
+tareasRouter.put('/:id',
+    auth,
+    actualizarTarea
+)
+
+// Eliminar tarea
+tareasRouter.delete('/:id',
+    auth,
+    eliminarTarea
+)
 
 export default tareasRouter;
