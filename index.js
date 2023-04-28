@@ -3,6 +3,7 @@ import conectarDB from "./config/db.js";
 import usersRouter from './routes/usuarios.js'
 import authRouter from './routes/auth.js'
 import proyectosRouter from './routes/proyectos.js'
+import tareasRouter from './routes/tareas.js'
 
 // Crear el servidor
 const app = express()
@@ -21,6 +22,7 @@ const PORT = process.env.PORT || 4000
 app.use('/api/usuarios', usersRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/proyectos', proyectosRouter)
+app.use('/api/tareas', tareasRouter)
 
 
 app.listen(PORT, () => {
