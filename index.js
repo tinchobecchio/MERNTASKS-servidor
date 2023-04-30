@@ -4,12 +4,17 @@ import usersRouter from './routes/usuarios.js'
 import authRouter from './routes/auth.js'
 import proyectosRouter from './routes/proyectos.js'
 import tareasRouter from './routes/tareas.js'
+import cors from 'cors'
+
 
 // Crear el servidor
 const app = express()
 
 // Conectar a la base de datos
 conectarDB()
+
+// habilitar cors
+app.use(cors())
 
 // Habilitar express.json
 app.use(express.json({extended: true}))
